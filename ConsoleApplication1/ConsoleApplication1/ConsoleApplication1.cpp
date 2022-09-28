@@ -82,21 +82,42 @@
 //	return cvt_s2h(tss / n);
 //}
 
-#include<iostream>//일차원 배열을 이차원 배열식으로 출력하기
+//#include<iostream>//일차원 배열을 이차원 배열식으로 출력하기
+//
+//using namespace std;
+//
+//int main() {
+//	int ary[] = { 6,2,9,3,8,4,5,1 };
+//	int(*ary2)[2] = (int(*)[2])ary;
+//
+//
+//	for (int i = 0; i < 4; i++) {
+//		for (int j = 0; j < 2; j++) {
+//			cout << ary2[i][j] << " ";
+//		}
+//		cout << endl;
+//	}
+//
+//	return 0;
+//}
 
-using namespace std;
+#include "Heap.h"
 
-int main() {
-	int ary[] = { 6,2,9,3,8,4,5,1 };
-	int(*ary2)[2] = (int(*)[2])ary;
+int main(void) {
+	element dat[] = { 69,10,30,2,16,8,31,22,6,3,9,5,7,1,9 };
+	int cnt = sizeof(dat) / sizeof(element);
+	HeapType Heap(cnt);
+	Heap.creatHeap();
 
-
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 2; j++) {
-			cout << ary2[i][j] << " ";
-		}
-		cout << endl;
+	printf("\n 입력자료:\t"); p_out(dat, cnt);
+	printf("\n\n Heap Tree:\n");
+	for (int a = 0; a < cnt; a++) {
+		Heap.insertHeap(dat[a]);
+		Heap.printHeap();
 	}
-
-	return 0;
+	printf("\n Delete Heap:\n");
+	for (int a = 1; a <= cnt; a++) {
+		printf("\n Delete Value: %d\n", Heap.deleteHeap());
+		Heap.printHeap();
+	}
 }
