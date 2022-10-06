@@ -101,23 +101,68 @@
 //	return 0;
 //}
 
-#include "Heap.h"
-
-int main(void) {
-	element dat[] = { 69,10,30,2,16,8,31,22,6,3,9,5,7,1,9 };
-	int cnt = sizeof(dat) / sizeof(element);
-	HeapType Heap(cnt);
-	Heap.creatHeap();
-
-	printf("\n 입력자료:\t"); p_out(dat, cnt);
-	printf("\n\n Heap Tree:\n");
-	for (int a = 0; a < cnt; a++) {
-		Heap.insertHeap(dat[a]);
-		Heap.printHeap();
+//기수정렬 코드->일단 여기는 func.cpp
+#include "stack.h"
+void Stack::push(int dat) {
+	if (SP < SZ) {
+		Data[SP] = dat;
+		SP++;
 	}
-	printf("\n Delete Heap:\n");
-	for (int a = 1; a <= cnt; a++) {
-		printf("\n Delete Value: %d\n", Heap.deleteHeap());
-		Heap.printHeap();
+	else cout << INVALID_POS;
+}
+int Stack::pop() {
+	if (SP > 0) return Data[--SP];
+	return EMPTY_STACK;
+}
+
+int Stack::iterate_pop(int* org, int cnt) {
+	int tcnt = cnt, dat;
+
+	if (SP > 0) {
+		for (int a = SP - 1; a >= 0; a--) {
+			dat = this->pop();
+			printf("%d ", dat); org[tcnt] = dat;
+			tcnt++;
+		}
+	}
+	return tcnt;
+}
+
+void Radix_Sort(int org[], int SZ) {
+	int Max = 0, Maxdigit;
+	for (int a = 0; a < SZ; a++) {
+		if (org[a] > Max) Max = org[a];
+	}
+	Maxdigit = (int)log10(Max) + 1;
+
+	Stack stack[10];
+	for (int a = 0; a < 10; a++) {
+		stack[a] = Stack(SZ);
+	}
+	int dat = 0, r = 0, deci = 1, direction = 1;
+	if (Maxdigit % 2 == 0) direction = -direction;
+
+	int cnt = 0, si = 0, gg = 9;
+
+	for (int c = 0; c < Maxdigit; c++) {
+		for (int a = 0; a < SZ; a++) {
+			dat = org[a];
+			r = dat / deci % 10;
+			cout << dat << " ";
+			stack[r].push(dat);
+		}
+		cout << endl;
+		cnt = 0;
+		if (direction == 1) { si = 0; gg = 10; }
+		else { si = 9; gg = -1; }
+
+		for (int a = si; a != gg; a += direction) {
+			cnt = stack[a].iterate_pop(org, cnt);
+		}
+		cout << endl << endl;
+		deci *= 10; direction = -direction;
+	}
+	for (int a = 0; a < 10; a++) {
+		stack[a].clear();
 	}
 }
