@@ -1,2 +1,4 @@
 ﻿  ConsoleApplication1.cpp
+C:\Users\DSM2022\OneDrive\바탕 화면\문서\GitHub\C-Plus-study\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(261,6): warning C4101: 'a' :참조되지 않은 지역 변수입니다.
+C:\Users\DSM2022\OneDrive\바탕 화면\문서\GitHub\C-Plus-study\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(372,34): warning C4552: '>>': 식의 결과가 사용되지 않습니다.
   ConsoleApplication1.vcxproj -> C:\Users\DSM2022\OneDrive\바탕 화면\문서\GitHub\C-Plus-study\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe
